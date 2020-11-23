@@ -46,3 +46,10 @@ func UpdateProduct(product *models.Product) {
 		fmt.Errorf(err.Error())
 	}
 }
+
+func RemoveProduct(ID uuid.UUID) {
+	s := "DELETE FROM public.\"PRODUCTS\" WHERE id='" + ID.String() + "';"
+	if err := models.DB.RawQuery(s).Exec(); err != nil {
+		fmt.Errorf(err.Error())
+	}
+}

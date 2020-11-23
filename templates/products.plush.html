@@ -29,6 +29,7 @@
             <th class="centered">COLOR</th>
             <th class="centered">NAME</th>
             <th class="centered">Edit</th>
+            <th class="centered">Remove</th>
           </tr>
         </thead>
         <tbody>
@@ -49,6 +50,11 @@
               </td>
               <td class="centered">
                 <a href="/findProducts/<%= r.ID %>/edit"><img src="<%= rootPath() %>assets/images/pencil-square.svg" alt=""></a>
+              </td>
+              <td class="centered">
+                <%= form({action: "/Product/" +  r.ID , method: "DELETE"}) { %>
+                  <button class="btn btn-link" role="submit"><img src="<%= rootPath() %>assets/images/trash.svg" alt=""></button>
+                <% } %>
               </td>
             </tr>
           <% } %>

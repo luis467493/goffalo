@@ -70,7 +70,6 @@ func updateProduct(c buffalo.Context) error {
 	color, _ := uuid.FromString(c.Param("Color"))
 	varType, _ := uuid.FromString(c.Param("Type"))
 
-
 	repository.UpdateProduct(&models.Product{
 		ID:    id,
 		Name:  c.Param("Name"),
@@ -81,3 +80,9 @@ func updateProduct(c buffalo.Context) error {
 	return findProducts(c)
 }
 
+func removeProduct(c buffalo.Context) error {
+	id, _ := uuid.FromString(c.Param("product_id"))
+	repository.RemoveProduct(id)
+
+	return findProducts(c)
+}
