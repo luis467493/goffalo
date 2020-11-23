@@ -65,6 +65,7 @@ func App() *buffalo.App {
 		app.GET("/findProducts/{product_id}/edit", editProduct)
 		app.POST("/Product", saveProduct)
 		app.PUT("/Product/{product_id}", updateProduct)
+		app.DELETE("/Product/{product_id}", removeProduct)
 
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
