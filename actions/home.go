@@ -1,6 +1,7 @@
 package actions
 
 import (
+	"encoding/base64"
 	"net/http"
 
 	"github.com/gobuffalo/buffalo"
@@ -15,12 +16,22 @@ func HomeHandler(c buffalo.Context) error {
 	return c.Render(http.StatusOK, r.HTML("index.html"))
 }
 
+func encodeBase64(ID uuid.UUID) string {
+	return base64.StdEncoding.EncodeToString([]byte(ID.String()))
+}
+
+func decodeBase64(ID string) uuid.UUID{
+	decoded, _ := base64.StdEncoding.DecodeString(ID)
+	decodedId, _ := uuid.FromString(string(decoded))
+	return decodedId
+}
+
 func findProducts(c buffalo.Context) error {
 	products, _ := repository.FindProducts()
 	listProducts := make([]models.ProductDto, 0, len(products))
 	for _, product := range products {
 		listProducts = append(listProducts, models.ProductDto{
-			ID:    product.ID,
+			ID:    encodeBase64(product.ID),
 			Name:  product.Name,
 			Color: repository.FindColorById(product.Color).Name,
 			Type:  repository.FindTypeById(product.Type).Name,
@@ -44,14 +55,22 @@ func editProduct(c buffalo.Context) error {
 	c.Set("colors", repository.GetColorMap())
 	c.Set("types", repository.GetTypeMap())
 
-	id, _ := uuid.FromString(c.Param("product_id"))
+	id := decodeBase64(c.Param("product_id"))
+
 	product := repository.FindProductById(id)
-	c.Set("product", product)
+	productDto := models.ProductDto{
+		ID:    encodeBase64(product.ID),
+		Name:  product.Name,
+		Color: product.Color.String(),
+		Type:  product.Type.String(),
+	}
+
+	c.Set("product", productDto)
 	return c.Render(http.StatusOK, r.HTML("productEdit.html"))
 }
 
 func saveProduct(c buffalo.Context) error {
-	id, _ := uuid.FromString(c.Param("product_id"))
+	id := decodeBase64(c.Param("product_id"))
 	color, _ := uuid.FromString(c.Param("Color"))
 	varType, _ := uuid.FromString(c.Param("Type"))
 
@@ -66,7 +85,7 @@ func saveProduct(c buffalo.Context) error {
 }
 
 func updateProduct(c buffalo.Context) error {
-	id, _ := uuid.FromString(c.Param("product_id"))
+	id := decodeBase64(c.Param("product_id"))
 	color, _ := uuid.FromString(c.Param("Color"))
 	varType, _ := uuid.FromString(c.Param("Type"))
 
@@ -81,7 +100,7 @@ func updateProduct(c buffalo.Context) error {
 }
 
 func removeProduct(c buffalo.Context) error {
-	id, _ := uuid.FromString(c.Param("product_id"))
+	id := decodeBase64(c.Param("product_id"))
 	repository.RemoveProduct(id)
 
 	return findProducts(c)
