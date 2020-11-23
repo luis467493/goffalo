@@ -16,9 +16,10 @@
   <div class="col-md-12">
     <div class="subtitle">
       <div class="container">
-        <a href="/findProducts/new">New</a>
+        Products list
       </div>
     </div>
+    <a href="/findProducts/new"><img src="<%= rootPath() %>assets/images/plus-square.svg" alt=""></a>
     <div class="table-responsive">
       <table class="table table-striped">
         <thead>
@@ -47,7 +48,7 @@
                 <%= r.Name %>
               </td>
               <td class="centered">
-                <a href="/findProducts/<%= r.ID %>/edit" >Edit</a>
+                <a href="/findProducts/<%= r.ID %>/edit"><img src="<%= rootPath() %>assets/images/pencil-square.svg" alt=""></a>
               </td>
             </tr>
           <% } %>
