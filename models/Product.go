@@ -10,7 +10,7 @@ type Product struct {
 }
 
 type ProductDto struct {
-	ID    uuid.UUID `json:"ID"`
+	ID    string `json:"ID"`
 	Name  string    `json:"name,omitempty"`
 	Color string    `json:"color,omitempty"`
 	Type  string    `json:"type,omitempty"`

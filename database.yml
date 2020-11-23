@@ -2,9 +2,9 @@
 development:
   dialect: postgres
   database: coke_development
-  user: postgres
-  password: endava
-  host: localhost
+  user: xxxxx
+  password: xxxxx
+  host: xxxxx
   pool: 5
   port: 5433
 

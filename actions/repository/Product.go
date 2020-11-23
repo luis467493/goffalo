@@ -9,7 +9,7 @@ import (
 
 func FindProducts() ([]models.Product, error) {
 	var listProduct []models.Product
-	s := "select prd.id as ID, prd.\"NAME\" as Name, prd.color as Color, prd.\"TYPE\" as Type from \"PRODUCTS\" prd order by prd.\"TYPE\", prd.color, prd.\"NAME\";"
+	s := "select prd.id as ID, prd.\"NAME\" as Name, prd.color as Color, prd.\"TYPE\" as Type from \"PRODUCTS\" prd order by prd.\"TYPE\" asc, prd.color asc, prd.\"NAME\" asc;"
 	if err := models.DB.RawQuery(s).All(&listProduct); err != nil {
 		fmt.Errorf(err.Error())
 	}
