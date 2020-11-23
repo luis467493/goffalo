@@ -1,0 +1,59 @@
+<header>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1 col-sm-2 col-xs-2 logo">
+        <a href="<%= rootPath() %>"><img src="<%= rootPath() %>assets/images/logo.svg" alt=""></a>
+      </div>
+      <div class="col-md-9 col-sm-9 col-xs-10 titles">
+        <h1>Products</h1>
+      </div>
+    </div>
+  </div>
+
+</header>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="subtitle">
+      <div class="container">
+        <a href="/findProducts/new">New</a>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr text-align="left">
+            <th class="centered" hidden="true">ID</th>
+            <th class="centered">TYPE</th>
+            <th class="centered">COLOR</th>
+            <th class="centered">NAME</th>
+            <th class="centered">Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <%= for (r) in products { %>
+            <tr>
+              <td class="centered" hidden="true">
+                <%= r.ID %>
+              </td>
+              <td class="centered">
+                <%= r.Type %>
+              </td>
+              <td class="centered">
+                <%= r.Color %>
+              </td>
+              <td class="centered">
+                <%= r.Name %>
+              </td>
+              <td class="centered">
+                <a href="/findProducts/<%= r.ID %>/edit" >Edit</a>
+              </td>
+            </tr>
+          <% } %>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

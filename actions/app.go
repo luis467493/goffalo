@@ -58,7 +58,13 @@ func App() *buffalo.App {
 		// Setup and use translations:
 		app.Use(translations())
 
-		app.GET("/", HomeHandler)
+		//app.GET("/", HomeHandler)
+		app.GET("/", findProducts)
+		app.GET("/findProducts", findProducts)
+		app.GET("/findProducts/new", newProduct)
+		app.GET("/findProducts/{product_id}/edit", editProduct)
+		app.POST("/Product", saveProduct)
+		app.PUT("/Product/{product_id}", updateProduct)
 
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}

@@ -1,0 +1,45 @@
+<header>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1 col-sm-2 col-xs-2 logo">
+        <a href="<%= rootPath() %>"><img src="<%= rootPath() %>assets/images/logo.svg" alt=""></a>
+      </div>
+      <div class="col-md-9 col-sm-9 col-xs-10 titles">
+        <h1>Products</h1>
+      </div>
+    </div>
+  </div>
+
+</header>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="subtitle">
+      <div class="container">
+        <h3>Edit Product</h3>
+      </div>
+    </div>
+    <fieldset class="box">
+<%= form_for(product, {action: "/Product/" +  product.ID , method: "PUT"}) { %>
+      <%= f.InputTag("Name") %>
+        <%= f.SelectTag("Color", {
+        "label": "Color",
+        options: colors,
+        value: product.Color,
+        "allow_blank": false,
+        "required":true
+        }) %>
+
+        <%= f.SelectTag("Type", {
+        "label": "Type",
+        options: types,
+        value: product.Type,
+        "allow_blank": false,
+        "required":true
+        }) %>
+    <button class="btn btn-success " role="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save</button>
+<% } %>
+      </fieldset>
+  </div>
+</div>
+<div class="foot"> <span> Powered by <a href="http://gobuffalo.io/">gobuffalo.io</a></span> </div>

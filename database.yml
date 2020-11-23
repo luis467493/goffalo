@@ -1,11 +1,12 @@
 ---
 development:
   dialect: postgres
-  database: products_development
+  database: coke_development
   user: postgres
-  password: postgres
-  host: 127.0.0.1
+  password: endava
+  host: localhost
   pool: 5
+  port: 5433
 
 test:
   url: {{envOr "TEST_DATABASE_URL" "postgres://postgres:postgres@127.0.0.1:5432/products_test?sslmode=disable"}}
